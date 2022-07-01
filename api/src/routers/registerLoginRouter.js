@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import { adminRegistrationValidation } from "../middleware/validaiomnMiddleware.js";
 const route = express.Router();
 
 // route.all("/", (req, res, next) => {
@@ -6,7 +7,7 @@ const route = express.Router();
 //   next();
 // });
 
-route.post("/", (req, res) => {
+route.post("/", adminRegistrationValidation, (req, res) => {
   console.log(req.body);
   res.json({
     message: "todo",
