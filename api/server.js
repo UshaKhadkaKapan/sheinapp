@@ -4,11 +4,15 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 import helmet from "helmet";
 import morgan from "morgan";
+
 import registerLoginRouter from "./src/routers/registerLoginRouter.js";
 
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
+
+import { mongoConnection } from "./src/config/dbConfig.js";
+mongoConnection();
 
 app.use("/api/v1/register-login", registerLoginRouter);
 
