@@ -6,8 +6,15 @@ export const adminRegistrationValidation = (req, res, next) => {
     fName: Joi.string().min(3).max(50).required(),
     lName: Joi.string().min(3).max(50).required(),
     email: Joi.string().email({ minDomainSegments: 2 }).max(50).required(),
-    password: Joi.string().min().max(50).required(),
+    password: Joi.string().min(6).max(50).required(),
   });
-  const result = schema.validate(req.body);
-  console.log(result);
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    return res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+  next();
 };
