@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { postAdminUser } from "../helper/axiosHelper";
+import { toast } from "react-toastify";
 
 const RegisterForm = () => {
   const [form, setForm] = useState({});
@@ -8,10 +11,16 @@ const RegisterForm = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
+    if (form.password !== form.confirmpassword) {
+      return Alert("password and confirm password don not match");
+    }
+    const { status, message } = await postAdminUser(form);
+    toast[status](message);
   };
+
   return (
     <div>
       <Form onSubmit={handleOnSubmit}>
@@ -57,7 +66,23 @@ const RegisterForm = () => {
             onChange={handleOnChange}
           />
         </Form.Group>
-        <Button variant="primary">Submit</Button>
+        <Form.Group className="mb-3 " controlId="formGroupPassword">
+          <Form.Label> Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="confirmpassword"
+            placeholder=" Enter your Password"
+            required
+            onChange={handleOnChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        <hr />
+        <div className="text-end">
+          Already have an account? <Link to="/">Login</Link>
+        </div>
       </Form>
     </div>
   );

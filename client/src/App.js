@@ -3,6 +3,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import Registeration from "./pages/Registeration";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/register" element={<Registeration />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 };

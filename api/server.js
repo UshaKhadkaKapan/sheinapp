@@ -7,6 +7,7 @@ import morgan from "morgan";
 
 import registerLoginRouter from "./src/routers/registerLoginRouter.js";
 
+app.use(cors());
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
