@@ -9,6 +9,6 @@ Content-Type: application/json
 {
     "fName":"Usha",
     "lName":"Khadka",
-    "email":"khadkausha83@gmail.com",
+    "email":"khadkausha8@gmail.com",
     "password":"1234567"
 }

@@ -22,9 +22,16 @@ route.post("/", adminRegistrationValidation, async (req, res, next) => {
     console.log(result);
     // unique url send to the client for the proof
     res.json({
-      message: "todo",
+      status: "success",
+      message:
+        "We have send you the email. Please check you email and verify it and follow the instruction to activate the account",
     });
   } catch (error) {
+    if (error.message.includes("E11000 duplicate key error collection")) {
+      error.status = 200;
+      error.message =
+        "Email is already used. Please login or use another email for registration";
+    }
     next(error);
   }
 });
